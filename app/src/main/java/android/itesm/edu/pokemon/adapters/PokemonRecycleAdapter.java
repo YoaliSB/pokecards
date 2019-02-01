@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
@@ -45,12 +46,17 @@ public class PokemonRecycleAdapter
 
     @Override
     public void onBindViewHolder(@NonNull PokeRecordHolder pokeRecordHolder, int i) {
+        pokeRecordHolder.name.setText(cards.get(i).getName());
+        pokeRecordHolder.id.setText(cards.get(i).getId());
+        pokeRecordHolder.artist.setText(cards.get(i).getArtist());
 
+        Glide.with(context)
+                .load(cards.get(i).getImageUrl()).apply(options).into(pokeRecordHolder.image);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return cards.size();
     }
 
     public static class PokeRecordHolder extends RecyclerView.ViewHolder{
